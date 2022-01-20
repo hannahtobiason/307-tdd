@@ -1,9 +1,5 @@
 const portfolio = {
     stocks: [
-        {
-            stock,
-            shares,
-        }
     ]
 }
 
@@ -13,9 +9,14 @@ function createPortfolio(){
 }
 
 function isempty(portfolio){
-    return (portfolio.shares === null && portfolio.tickers === null);
+    return (portfolio.stocks === null);
 
 };
 
+function uniqueStocks(portfolio){
+    return(portfolio.stocks.length);
+}
+
+exports.uniqueStocks = uniqueStocks;
 exports.createPortfolio = createPortfolio;
 exports.isempty = isempty;
