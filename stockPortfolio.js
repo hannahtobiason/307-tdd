@@ -31,6 +31,7 @@ function sale(portfolio, name, value){
         throw new Error(ShareSaleException);
     }
     portfolio.stocks[idx].value -= value;
+    console.log(portfolio.stocks[idx]);
 }
 
 function numberOfShares(portfolio, name){
@@ -38,19 +39,19 @@ function numberOfShares(portfolio, name){
     return(portfolio.stocks[idx].value);
 }
 
-//Why two functions doing same find?? //
 function findStockByName(portfolio, name){
     return portfolio.stocks.find( (stock) => stock.name === name);
 };
 
-//PLEASE combine this function with the one above >:( //
 function findIndex(portfolio, stock){
     console.log(stock);
     return(portfolio.stocks.indexOf(stock));
 };
 
+//need to fix this function... doesn't filter correctly
 function onlyOwned(portfolio){
-    return portfolio.stocks.filter( (stock) => stock.value != 0);
+    portfolio.stocks.filter( (stock) => stock.value != 0);
+    console.log(portfolio);
 }
 
 exports.onlyOwned = onlyOwned;

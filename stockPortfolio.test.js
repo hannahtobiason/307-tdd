@@ -29,10 +29,10 @@ test('making a purchase', () =>{
 
 test('make a sale', () =>{
     symbol = 'JOE';
-    num = 0;
+    num = 1;
     myFuncs.sale(p, symbol, num);
     idx = myFuncs.findIndex(p, myFuncs.findStockByName(p, symbol));
-    expect(p.stocks[idx].value).toBe(1000);
+    expect(p.stocks[idx].value).toBe(999);
 });
 
 test('shares by symbol', () =>{
@@ -42,6 +42,11 @@ test('shares by symbol', () =>{
     result = myFuncs.numberOfShares(p, symbol);
     expect(result).toBe(9);
 });
+
+test('testing unique stocks with a few', () => {
+    result = myFuncs.uniqueStocks(p);
+    expect(result).toBe(2);   
+})
 
 test('find stock by name', () => {
     symbol = 'HAN';
@@ -56,8 +61,19 @@ test('index of given stock', () =>{
     expect(idx).toBe(1);
 });
 
-test('only ownded stocks', () => {
+//make a more robust test with more stocks, some empty//
+test('only owned stocks', () => {
     myFuncs.onlyOwned(p);
+    for(let i = 0; i < p.stocks.length; i++){
+        expect(p.stocks[i].value).not.toBe(0);
+    }
+});
+
+test('only owned stocks start with some unowned', () =>{
+    myFuncs.purchase(p, 'APL', 5);
+    myFuncs.sale(p, 'APL', 5);
+    myFuncs.onlyOwned(p);
+    console.log(p);
     for(let i = 0; i < p.stocks.length; i++){
         expect(p.stocks[i].value).not.toBe(0);
     }
