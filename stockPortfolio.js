@@ -23,19 +23,24 @@ function purchase(portfolio, name, value){
 }
 
 function sale(portfolio, name, value){
-    console.log(portfolio.stocks[0]);
-    portfolio.stocks[0].value -= num;
+    idx = findIndex(portfolio, findStockByName(portfolio, name));    
+    console.log(portfolio.stocks[idx]);
+    portfolio.stocks[idx].value -= value;
 }
 
 function numberOfShares(portfolio, name){
-    return(portfolio.stocks[1].value);
+    idx = findIndex(portfolio, findStockByName(portfolio, name));
+    return(portfolio.stocks[idx].value);
 }
 
+//Why two functions doing same find?? //
 function findStockByName(p, name){
-    return(p.stocks.filter( (stock) => stock.name === name));
+    return p.stocks.find( (stock) => stock.name === name);
 };
 
+//PLEASE combine this function with the one above >:( //
 function findIndex(p, stock){
+    console.log(stock);
     return(p.stocks.indexOf(stock));
 };
 

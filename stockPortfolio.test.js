@@ -21,17 +21,18 @@ test('returning number of unique stocks', () =>{
 });
 
 test('making a purchase', () =>{
-    symbol = 'APL';
-    num = 5;
+    symbol = 'JOE';
+    num = 1000;
     myFuncs.purchase(p, symbol, num);
-    expect(p.stocks[0]).not.toBeNull();
+    expect(p.stocks[p.stocks.length-1]).not.toBeNull();
 });
 
 test('make a sale', () =>{
-    symbol = 'APL';
-    num = 5;
+    symbol = 'JOE';
+    num = 0;
     myFuncs.sale(p, symbol, num);
-    expect(p.stocks[0].value).toBe(0);
+    idx = myFuncs.findIndex(p, myFuncs.findStockByName(p, symbol));
+    expect(p.stocks[idx].value).toBe(1000);
 });
 
 test('shares by symbol', () =>{
@@ -50,6 +51,7 @@ test('find stock by name', () => {
 
 test('index of given stock', () =>{
     result = myFuncs.findStockByName(p, 'HAN');
+    console.log(result);
     idx = myFuncs.findIndex(p, result);
     expect(idx).toBe(1);
 });
