@@ -1,7 +1,9 @@
+const ShareSaleException = 'Not enough shares to sell desired amount';
 const portfolio = {
     stocks: [
     ]
 }
+
 
 function createPortfolio(){
     p = portfolio;
@@ -25,6 +27,9 @@ function purchase(portfolio, name, value){
 function sale(portfolio, name, value){
     idx = findIndex(portfolio, findStockByName(portfolio, name));    
     console.log(portfolio.stocks[idx]);
+    if(portfolio.stocks[idx].value < value){
+        throw new Error(ShareSaleException);
+    }
     portfolio.stocks[idx].value -= value;
 }
 
@@ -34,16 +39,21 @@ function numberOfShares(portfolio, name){
 }
 
 //Why two functions doing same find?? //
-function findStockByName(p, name){
-    return p.stocks.find( (stock) => stock.name === name);
+function findStockByName(portfolio, name){
+    return portfolio.stocks.find( (stock) => stock.name === name);
 };
 
 //PLEASE combine this function with the one above >:( //
-function findIndex(p, stock){
+function findIndex(portfolio, stock){
     console.log(stock);
-    return(p.stocks.indexOf(stock));
+    return(portfolio.stocks.indexOf(stock));
 };
 
+function onlyOwned(portfolio){
+    return portfolio.stocks.filter( (stock) => stock.value != 0);
+}
+
+exports.onlyOwned = onlyOwned;
 exports.findIndex = findIndex;
 exports.findStockByName = findStockByName;
 exports.numberOfShares = numberOfShares;

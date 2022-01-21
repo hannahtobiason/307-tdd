@@ -56,3 +56,13 @@ test('index of given stock', () =>{
     expect(idx).toBe(1);
 });
 
+test('only ownded stocks', () => {
+    myFuncs.onlyOwned(p);
+    for(let i = 0; i < p.stocks.length; i++){
+        expect(p.stocks[i].value).not.toBe(0);
+    }
+});
+
+test('sold too many shares', () => {
+    expect(() => myFuncs.sale(p, 'JOE', 2000).toThrow(ShareSaleException));
+});
