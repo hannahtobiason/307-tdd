@@ -8,7 +8,7 @@ const portfolio = {
 function createPortfolio(){
     p = portfolio;
     return p;
-}
+};
 
 function isempty(portfolio){
     return (portfolio.stocks === null);
@@ -48,10 +48,10 @@ function findIndex(portfolio, stock){
     return(portfolio.stocks.indexOf(stock));
 };
 
-//need to fix this function... doesn't filter correctly
-function onlyOwned(portfolio){
-    portfolio.stocks.filter( (stock) => stock.value != 0);
-    console.log(portfolio);
+function onlyOwned(portfolio, portfolio2){
+    portfolio2 = portfolio.stocks.filter( stock => stock.value > 0);
+    console.log(portfolio2);
+    return portfolio2;
 }
 
 exports.onlyOwned = onlyOwned;
@@ -63,3 +63,4 @@ exports.purchase = purchase;
 exports.uniqueStocks = uniqueStocks;
 exports.createPortfolio = createPortfolio;
 exports.isempty = isempty;
+exports.portfolio = portfolio;

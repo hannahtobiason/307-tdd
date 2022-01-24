@@ -1,10 +1,11 @@
 const { TestWatcher } = require('jest');
 const myFuncs = require('./stockPortfolio.js');
 
-
 function setup(){
     p = myFuncs.createPortfolio();
-}
+    p2 = myFuncs.createPortfolio();
+};
+
 setup();
 
 test('testing portfolio created', () => {
@@ -63,19 +64,21 @@ test('index of given stock', () =>{
 
 //make a more robust test with more stocks, some empty//
 test('only owned stocks', () => {
-    myFuncs.onlyOwned(p);
-    for(let i = 0; i < p.stocks.length; i++){
-        expect(p.stocks[i].value).not.toBe(0);
+    myFuncs.onlyOwned(p, p2);
+    for(let i = 0; i < p2.stocks.length; i++){
+        expect(p2.stocks[i].value).not.toBe(0);
     }
 });
 
+//removes the unownded stock in the function file, somehow remains in here ...//
 test('only owned stocks start with some unowned', () =>{
     myFuncs.purchase(p, 'APL', 5);
     myFuncs.sale(p, 'APL', 5);
-    myFuncs.onlyOwned(p);
-    console.log(p);
-    for(let i = 0; i < p.stocks.length; i++){
-        expect(p.stocks[i].value).not.toBe(0);
+    myFuncs.onlyOwned(p, p2);
+    console.log(p2);
+    for(let i = 0; i < p2.stocks.length; i++){
+        console.log(p2.stocks[i]);
+        expect(p2.stocks[i].value).not.toBe(0);
     }
 });
 
